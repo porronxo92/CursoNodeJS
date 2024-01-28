@@ -1,20 +1,24 @@
-# CursoNodeJS
-Curso Node JS de midudev
-### Curso en Youtube --> [Link curso completo](https://midu.link/node)
+# Curso NodeJS
 
-# CLASE 1 - Introduccion y primeros pasos de NodeJS
-### [Clase 1](https://youtu.be/yB4n_K7dZV8?si=_ujixMJwRDtyiRGB)
+### Curso de Node.js por midudev
+- [Enlace al curso completo](https://midu.link/node)
 
-# CLASE 2 - Desarrollo de una API y conceptos basicos de API REST
-### [Clase 2](https://youtu.be/YmZE1HXjpd4?si=FL3XeudONdy0yi3E)
-En este video vemos la creacion de una API con librerias nativas de NodeJS como http, el routing de las llamadas y por ultimo migramos la API REST en http al framework Express 
+### Clase 1 - Introducción y Primeros Pasos con Node.js
+- [Ver Clase 1](https://youtu.be/yB4n_K7dZV8?si=_ujixMJwRDtyiRGB)
 
-# CLASE 3 - Solucion del problema de CORS y creación una API REST con Framework _Express_
-### [Clase 3](https://youtu.be/-9d3KhCqOtU?si=AusgPz4_LB04p1ee)
-En este video se ve al completo y de forma nativa como trabaja Express para crear los diferentes metodos GET, DELETE, POST, PATCH y para que sirve cada uno de ellos. Creamos schema de validacion con ```ZOD para comprobar que los datos que vienen en la request con correctos. Entendemos que es el CORS porque sucede el error y como solventarlo. Vemos los diferentes errores REST que hay y cuando devolverlos.
+### Clase 2 - Desarrollo de una API y Conceptos Básicos de API REST
+- [Ver Clase 2](https://youtu.be/YmZE1HXjpd4?si=FL3XeudONdy0yi3E)
 
-# CLASE 4 - Arquitectura Modelo-Vista-Controlador
-### [Clase 4](https://youtu.be/ev3Yxva4wI4?si=R7A9r7vj5QuKHWTE)
-__IMPORTANTE:__ _Pasamos de CommonJS a ESModules_
+En este video, exploramos la creación de una **API** utilizando las librerías nativas de **Node.js** como `http`, el enrutamiento de las llamadas y, finalmente, la migración de la **API REST** de **http** al framework **Express**.
 
-En el video al completo vemos el Router de _Express_ y para que sirve, entendimiento de cuando y porque utilizar una arquitectura MVC, para que sirve cada pilar de la arquitectura y como modularizar todo el codigo para que quede limpio. Desplegar una API en FL0 y consumirla. 
+### Clase 3 - Solución del Problema de CORS y Creación de una API REST con el Framework _Express_
+- [Ver Clase 3](https://youtu.be/-9d3KhCqOtU?si=AusgPz4_LB04p1ee)
+
+En este video, se muestra de forma completa y nativa cómo trabaja **Express** para crear los diferentes métodos **GET**, **DELETE**, **POST**, **PATCH** y para qué sirve cada uno de ellos. Creamos esquemas de validación con **Zod** para comprobar que los datos que llegan en la solicitud son correctos. Entendemos qué es el **CORS**, por qué ocurre el error y cómo solucionarlo. También se abordan los diferentes errores **REST** que pueden ocurrir y cuándo devolverlos.
+
+### Clase 4 - Arquitectura Modelo-Vista-Controlador
+- [Ver Clase 4](https://youtu.be/ev3Yxva4wI4?si=R7A9r7vj5QuKHWTE)
+
+**IMPORTANTE:** _Pasamos de CommonJS a ESModules_
+
+En este video, exploramos el Router de **Express** y para qué sirve, comprendemos cuándo y por qué utilizar una arquitectura **MVC**, para qué sirve cada pilar de la arquitectura y cómo modularizar todo el código para que quede limpio. También se muestra cómo desplegar una **API** en **FL0** y consumirla.
