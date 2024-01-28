@@ -3,7 +3,7 @@
 //Validaciones de datos para perpetuar la integridad de los datos. Por ejemplo, validaciones de los datos de la bbdd,
 //validaciones de que un dato es INT y no STRING, o si un id ya existe.
 
-import { readJSON } from '../utils.js'
+import { readJSON } from '../../utils.js'
 import { randomUUID } from 'node:crypto' //para generar UUID v4
 
 const movies = readJSON('./movies.json')
