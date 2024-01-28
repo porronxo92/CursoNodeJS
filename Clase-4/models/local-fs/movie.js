@@ -8,6 +8,7 @@ import { randomUUID } from 'node:crypto' //para generar UUID v4
 
 const movies = readJSON('./movies.json')
 
+//LO IMPORTANTE ENTRE MODELOS DEL MISMO RECURSO, ES QUE CUMPLA EL MISMO CONTRATO ESTABLECIDO DE METODOS Y CLASES
 export class MovieModel {
   static async getAllMovies({ genre }) {
     if (genre) {

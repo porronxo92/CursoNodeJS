@@ -9,6 +9,7 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 })
+//LO IMPORTANTE ENTRE MODELOS DEL MISMO RECURSO, ES QUE CUMPLA EL MISMO CONTRATO ESTABLECIDO DE METODOS Y CLASES
 
 async function run() {
   try {
