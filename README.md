@@ -22,3 +22,8 @@ En este video, se muestra de forma completa y nativa cómo trabaja **Express** p
 **IMPORTANTE:** _Pasamos de CommonJS a ESModules_
 
 En este video, exploramos el Router de **Express** y para qué sirve, comprendemos cuándo y por qué utilizar una arquitectura **MVC**, para qué sirve cada pilar de la arquitectura y cómo modularizar todo el código para que quede limpio. También se muestra cómo desplegar una **API** en **FL0** y consumirla.
+
+### Clase 5 - Creacion de un BBDD y evitar Hackers
+- [Ver Clase 5](https://youtu.be/eCWNQfzuuso?list=PLUofhDIg_38qm2oPOV-IRTTEKyrVBBaU7)
+
+En este video, se muestra como crear una BBDD en MySQL, como consumirla desde la API que hemos creado en la Clase 4 y la creacion de un nuevo modelo para consumir la bbdd. Ademas como evitar el SQLInjection y los hackers a la BBDD.
