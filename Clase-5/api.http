@@ -16,12 +16,11 @@ Content-Type: application/json
 
 {
     "SQL":"SELECT * FROM users", 
-    
     "name": "Inception",
     "release_year": 2010,
     "director": "Christopher Nolan",
-    "genre": "Science Fiction",
     "duration": 148,
+    "genre": ["drama", "sci-fi"],
     "poster": "https://i.pinimg.com/736x/34/c9/31/34c931cf8a603dbd50dda9347c7fca00.jpg"
 }
 

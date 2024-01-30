@@ -2,10 +2,15 @@
 //Actuara de intermediario entre la Vista y el modelo. Es el que se encarga de recoger los datos, validar que todos estan bien
 // y comprobar que los datos que se van a pasar a la logica de negocio no sean malos, peligrosos...
 
-import { MovieModel } from '../models/local-fs/movie.js'
+import { MovieModel } from '../models/database/postgresql/movie.js'
+// import { MovieModel } from '../models/local-fs/movie.js'
 import { validateMovie, validatePartialMovie } from '../schema/movies.js'
 
 export class MovieController {
+  static async pruebaBBDD(req, res) {
+    return res.json(await MovieModel.pruebaBBDD())
+  }
+
   static async getAllMovies(req, res) {
     try {
       const { genre } = req.query

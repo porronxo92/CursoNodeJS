@@ -13,7 +13,9 @@ const movieSchema = z.object({
   poster: z.string().url({
     message: 'URL not valid. Must be a valid URL',
   }),
-  genre: z.string(),
+  genre: z.array(z.enum(['drama', 'sci-fi', 'adventure', 'crime', 'musical', 'action']), {
+    required_error: 'Movie genre is required',
+  }),
 })
 
 export function validatePartialMovie(object) {
