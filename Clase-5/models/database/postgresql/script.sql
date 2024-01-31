@@ -1,7 +1,8 @@
+DROP TABLE movies, genre, movie_genre;
 -- Crear tabla MOVIES
 CREATE TABLE movies (id UUID primary key NOT NULL DEFAULT gen_random_uuid (),
-								 title VARCHAR (255) NOT NULL,
-								 year INT NOT NULL,
+								 nombre VARCHAR (255) NOT NULL,
+								 release_year INT NOT NULL,
 								 director VARCHAR(255) NOT NULL,
 								 duration INT NOT NULL,
 								 poster TEXT, 
@@ -31,7 +32,7 @@ insert into genre (name) values
 ('Action');
 
 -- Insertar películas en la tabla 'movies'
-INSERT INTO movies (title, year, director, duration, poster, rate)
+INSERT INTO movies (nombre, release_year, director, duration, poster, rate)
 VALUES 
     ('La La Land', 2016, 'Damien Chazelle', 128, 'https://pics.filmaffinity.com/la_la_land-262021831-mmed.jpg', 8.0),
     ('Inception', 2010, 'Christopher Nolan', 148, 'https://pics.filmaffinity.com/inception-652954101-mmed.jpg', 8.8),
@@ -41,13 +42,13 @@ VALUES
     ('Interstellar', 2014, 'Christopher Nolan', 169, 'https://pics.filmaffinity.com/interstellar-366875261-mmed.jpg', 8.6);
 
 insert into movie_genre(movie_id, genre_id) values 
-((select id from movies where title = 'La La Land'), (select id from genre where name = 'Musical')),
-((select id from movies where title = 'La La Land'), (select id from genre where name = 'Drama')),
-((SELECT id FROM movies WHERE title = 'Inception'), (SELECT id FROM genre WHERE name = 'Sci-Fi')),
-((SELECT id FROM movies WHERE title = 'The Shawshank Redemption'), (SELECT id FROM genre WHERE name = 'Drama')),
-((SELECT id FROM movies WHERE title = 'The Godfather'), (SELECT id FROM genre WHERE name = 'Crime')),
-((SELECT id FROM movies WHERE title = 'Forrest Gump'), (SELECT id FROM genre WHERE name = 'Drama')),
-((SELECT id FROM movies WHERE title = 'Interstellar'), (SELECT id FROM genre WHERE name = 'Action')),
-((SELECT id FROM movies WHERE title = 'Interstellar'), (SELECT id FROM genre WHERE name = 'Sci-Fi'));
+((select id from movies where nombre = 'La La Land'), (select id from genre where name = 'Musical')),
+((select id from movies where nombre = 'La La Land'), (select id from genre where name = 'Drama')),
+((SELECT id FROM movies WHERE nombre = 'Inception'), (SELECT id FROM genre WHERE name = 'Sci-Fi')),
+((SELECT id FROM movies WHERE nombre = 'The Shawshank Redemption'), (SELECT id FROM genre WHERE name = 'Drama')),
+((SELECT id FROM movies WHERE nombre = 'The Godfather'), (SELECT id FROM genre WHERE name = 'Crime')),
+((SELECT id FROM movies WHERE nombre = 'Forrest Gump'), (SELECT id FROM genre WHERE name = 'Drama')),
+((SELECT id FROM movies WHERE nombre = 'Interstellar'), (SELECT id FROM genre WHERE name = 'Action')),
+((SELECT id FROM movies WHERE nombre = 'Interstellar'), (SELECT id FROM genre WHERE name = 'Sci-Fi'));
 
 select * from movies;

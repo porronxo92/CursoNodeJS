@@ -2,24 +2,12 @@
 //VALIDACION QUE SE HACEN EN EL MODELO:
 //Validaciones de datos para perpetuar la integridad de los datos. Por ejemplo, validaciones de los datos de la bbdd,
 
-import { query } from 'express'
 import pg from 'pg'
 
 //validaciones de que un dato es INT y no STRING, o si un id ya existe.
 const DATABASE_URL_LOCAL = 'postgres://user_root:ruben.2409@localhost:5432/movies_database'
 const DATABASE_URL = process.env.DATABASE_URL || DATABASE_URL_LOCAL
-
-const password = process.env.PGPASSWORD || 'ruben.2409'
-const config = {
-  user: 'user_root', // default process.env.PGUSER || process.env.USER
-  password: password, //default process.env.PGPASSWORD
-  host: 'localhost', // default process.env.PGHOST
-  database: 'movies_database', // default process.env.PGDATABASE || user
-  port: 5432, // default process.env.PGPORT
-  connectionString: DATABASE_URL_LOCAL,
-}
-console.log(config)
-const client = new pg.Client(config)
+const client = new pg.Client(DATABASE_URL)
 await client.connect()
 
 //LO IMPORTANTE ENTRE MODELOS DEL MISMO RECURSO, ES QUE CUMPLA EL MISMO CONTRATO ESTABLECIDO DE METODOS Y CLASES
@@ -33,23 +21,22 @@ export class MovieModel {
     if (genre) {
       const lowerCaseGenre = genre.toLowerCase()
       const queryByGenre = `SELECT *
-        FROM movies m
-        WHERE EXISTS (
-            SELECT *
-            FROM movie_genre mg
-            JOIN genre g ON mg.genre_id = g.id
-            WHERE mg.movie_id = m.id
-            AND LOWER(g.name) = '${lowerCaseGenre}');` //hacer asi la query nos exponemos a tener ataques de SQL Injection
+          FROM movies m
+          WHERE EXISTS (
+              SELECT *
+              FROM movie_genre mg
+              JOIN genre g ON mg.genre_id = g.id
+              WHERE mg.movie_id = m.id
+              AND LOWER(g.name) = '${lowerCaseGenre}');` //hacer asi la query nos exponemos a tener ataques de SQL Injection
+      //los valores de la query no pueden ir con ${}
 
-      console.log(queryByGenre)
       const { rows } = await client.query(
-        `SELECT * FROM movies m 
-        WHERE EXISTS 
-        (SELECT * FROM movie_genre mg 
-            JOIN genre g 
-            ON mg.genre_id = g.id 
-            WHERE mg.movie_id = m.id 
-            AND LOWER(g.name) = $1);`,
+        `select * from movies m 
+          join movie_genre mg 
+          on m.id = mg.movie_id 
+          join genre g 
+          on g.id = mg.genre_id 
+          where lower(g.name) = $1; `,
         [lowerCaseGenre]
       )
       return rows
@@ -59,9 +46,13 @@ export class MovieModel {
   }
 
   static async getById({ id }) {
-    const { rows } = await client.query('SELECT * FROM movies WHERE id = $1;', [id])
-    const [movie] = rows
-    return movie
+    try {
+      const { rows } = await client.query('SELECT * FROM movies WHERE id = $1;', [id])
+      const [movie] = rows
+      return movie
+    } catch (error) {
+      console.error(error.message)
+    }
   }
 
   static async create({ input }) {
@@ -70,12 +61,11 @@ export class MovieModel {
     const {
       rows: [{ uuid }],
     } = resultUUID
-    console.log('uuid:', uuid)
 
     try {
-      const result = await client.query(
+      await client.query(
         `
-        INSERT INTO movies (id, title, year, director, duration, poster, rate) values ($1, $2, $3, $4, $5, $6, $7);`,
+        INSERT INTO movies (id, nombre, release_year, director, duration, poster, rate) values ($1, $2, $3, $4, $5, $6, $7);`,
         [uuid, name, release_year, director, duration, poster, rate]
       )
 
@@ -84,7 +74,7 @@ export class MovieModel {
         console.log('Genero:', genre)
         const {
           rows: [{ id }],
-        } = await client.query('SELECT id from genre WHERE name = $1', [lowerCaseGenre])
+        } = await client.query('SELECT id from genre WHERE LOWER(name) = $1', [lowerCaseGenre])
         console.log('idGenre', id)
         await client.query(
           `
@@ -98,11 +88,52 @@ export class MovieModel {
       console.log(newMovie)
       return newMovie
     } catch (error) {
-      console.error(error)
+      console.error(error.message)
     }
   }
 
-  static async delete({ id }) {}
+  static async delete({ id }) {
+    try {
+      const result_mg = await client.query('DELETE FROM movie_genre WHERE movie_id = $1;', [id])
+      const result_movie = await client.query('DELETE FROM movies WHERE id = $1;', [id])
 
-  static async update({ id, input }) {}
+      if (result_mg.rowCount > 0 && result_movie.rowCount > 0) {
+        return true
+      }
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+
+  static async update({ id, input }) {
+    try {
+      const parametros = Object.entries(input)
+        .map(([key], index) => {
+          return `${key} = $${index + 2}` // Añadir 2 para omitir el primer parámetro (id)
+        })
+        .join(', ')
+
+      console.log(parametros)
+      const valores = Object.entries(input).map(([key, value]) => {
+        return value // Añadir 2 para omitir el primer parámetro (id)
+      })
+      valores.unshift(id)
+      console.log(valores)
+
+      const { rowCount } = await client.query(
+        `
+      UPDATE movies
+      SET ${parametros}
+      where id = $1
+      `,
+        valores
+      )
+      console.log(`Se actualizaron ${rowCount} filas.`)
+      const { rows } = await client.query('SELECT * FROM movies WHERE id = $1;', [id])
+      console.log(rows)
+      return rows
+    } catch (error) {
+      console.error('Error al actualizar la película:', error.message)
+    }
+  }
 }

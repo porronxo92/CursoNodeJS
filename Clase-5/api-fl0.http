@@ -1,17 +1,17 @@
 ### Recuperar todas las peliculas 
-GET http://localhost:1234/movies
+GET https://first-rest-api-deploy-dev-jeeq.2.ie-1.fl0.io/movies
 
 ### Recuperar las peliculas por id
-GET http://localhost:1234/movies/2 
+GET https://first-rest-api-deploy-dev-jeeq.2.ie-1.fl0.io/movies/7c994f82-24f5-4718-816d-6b035fdf3411
 
 ### Recuperar las peliculas por genero. El 
-GET http://localhost:1234/movies?genre=drama
+GET https://first-rest-api-deploy-dev-jeeq.2.ie-1.fl0.io/movies?genre=drama
 
 ### Crear una pelicula
 ###/*creando la API con las validaciones ZOD este tipo de parametros los obviamos y 
 ### continuamos con los datos que realmente necesitamos para realizar 
 ### la accion para lo que esta definida la API */
-POST http://localhost:1234/movies
+POST https://first-rest-api-deploy-dev-jeeq.2.ie-1.fl0.io/movies
 Content-Type: application/json 
 
 {
@@ -27,17 +27,17 @@ Content-Type: application/json
 ###Actualizar una pelicula
 ### PATCH es para actualizar una parte del recurso al que estamos accediendo. 
 ### PUT es para actualiar el recurso completo. 
-PATCH http://localhost:1234/movies/ff30087d-5266-4a3a-ba73-f7276cb7e2f7
+PATCH https://first-rest-api-deploy-dev-jeeq.2.ie-1.fl0.io/movies/07a879a1-a07f-4ffd-8bf2-d4e4a234480e
 Content-Type: application/json
 
 {
     "id":123,
     "name": "Pinocho",
-    "release_year": 1996,
-    "duration": 153,
-    "rate": 7.3
+    "release_year": 1993,
+    "duration": 123,
+    "rate": 8.3
 }
 
 ### DELETE para eliminar el recurso completo. 
-DELETE http://localhost:1234/movies/fad3baf7-3a59-4e19-a70c-9c6be48c31e4
+DELETE https://first-rest-api-deploy-dev-jeeq.2.ie-1.fl0.io/movies/fad3baf7-3a59-4e19-a70c-9c6be48c31e4
 
